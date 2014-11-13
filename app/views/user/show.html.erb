@@ -1,0 +1,16 @@
+<%= if user_signed_in? %>
+	<p><%= current_user.name %> is logued in</p>
+	<%= link_to 'Logout', destroy_user_session_path, method: 'DELETE'%>
+<%= else %>
+ <h1> Not logued user</h1>
+ <% end %>
+
+<h1> this is profile for <%= @user.name %> </h1>
+<h2> Comics fos this guy </h2>
+
+<ul>
+	<% @user.comics.each do |comic| %>
+	<li><% comic.title %> (<%= comic.publisher %>)
+		
+	<% end %>
+</ul> 

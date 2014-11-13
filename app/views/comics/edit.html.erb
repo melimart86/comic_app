@@ -1,0 +1,26 @@
+<h1> TITLE </h1>
+
+<%= form_for(@comic) do |f| %>
+	<div class= "field">
+		<%= f.label :title %><br />
+		<%= f.text_field :title %><br />
+		<%= f.label :publisher %><br />
+		<%= f.text_field :publisher %>
+	</div>
+	<div class="field">
+		<% Tag.order(:name).each do |tag| %>
+			<%= check_box_tag("comic[tag_ids][]", tag.id,
+			@comic.tags.collect(&:id).include?(tag.id)) %>
+			<%= tag.name %> <br/>
+		<% end %>
+	</div>
+	<div class="field">
+		<% Character.order(:name).each do |character| %>
+			<%= check_box_tag("comic[character_ids][]", character.id,
+			@comic.characters.collect(&:id).include?(character.id)) %>
+			<%= character.name %> is appearing: <%= character.apperances.count %> times! <br/>
+		<% end %>
+	</div>
+
+	<br> <%= f.submit %>
+<% end %>
